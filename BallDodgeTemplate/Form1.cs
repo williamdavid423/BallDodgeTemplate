@@ -41,7 +41,8 @@ namespace BallDodgeTemplate
             }
 
             // add the new UserControl to the middle of the screen and focus on it
-            next.Location = new Point((f.Width - next.Width) / 2, (f.Height - next.Height) / 2);
+            next.Location = new Point((f.ClientSize.Width - next.Width) / 2,
+                (f.ClientSize.Height - next.Height) / 2);
             f.Controls.Add(next);
             next.Focus();
         }
