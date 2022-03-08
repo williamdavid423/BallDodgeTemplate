@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+
 
 namespace BallDodgeTemplate
 {
@@ -21,19 +23,19 @@ namespace BallDodgeTemplate
             ySpeed = _ySpeed;
         }
 
-        public void Move()
+        public void Move(Size screenSize)
         {
             x += xSpeed;
             y += ySpeed;
 
             //check if ball has reached right or left edge
-            if (x > GameScreen.gsWidth- size || x < 0)
+            if (x > screenSize.Width - size || x < 0)
             {
                 xSpeed *= -1; ;
             }
 
             //check if ball has reached right or left edge
-            if (y > GameScreen.gsHeight - size || y < 0)
+            if (y > screenSize.Height - size || y < 0)
             {
                 ySpeed *= -1; ;
             }

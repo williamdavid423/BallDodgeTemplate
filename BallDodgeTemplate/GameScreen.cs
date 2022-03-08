@@ -18,13 +18,14 @@ namespace BallDodgeTemplate
         List<Ball> dodgeBalls = new List<Ball>();
         
         Random randGen = new Random();
+        Size screenSize;
 
         public static int gsWidth = 600;
         public static int gsHeight = 600;
 
         bool upArrowDown = false;
         bool downArrowDown = false;
-        bool leftArrowDown = false;
+        public static bool leftArrowDown = false;
         bool rightArrowDown = false;
 
         public GameScreen()
@@ -35,6 +36,8 @@ namespace BallDodgeTemplate
 
         public void InitializeGame()
         {
+            screenSize = new Size(this.Width, this.Height);
+
             int x = randGen.Next(40, gsWidth - 40);
             int y = randGen.Next(40, gsHeight - 40);
 
@@ -98,16 +101,40 @@ namespace BallDodgeTemplate
         {
             if (leftArrowDown == true)
             {
-                hero.x -= hero.speed;
+                hero.Move("left", screenSize);
             }
 
-            chaseBall.Move();
+            if (rightArrowDown == true)
+            {
+                hero.Move("right", screenSize);
+            }
+
+            if (upArrowDown == true)
+            {
+                hero.Move("up", screenSize);
+            }
+
+            if (downArrowDown == true)
+            {
+                hero.Move("down", screenSize);
+            }
+
+            chaseBall.Move(screenSize);
             
             foreach( Ball b in dodgeBalls)
             {
-                b.Move();
+                b.Move(screenSize);
             }
             
+            Rectangle chaseRec = new Rectangle(chaseBall.x, chaseBall.y, chaseBall.size, chaseBall.size);
+
+            Rectangle heroRec = new Rectangle(hero.x, hero.y, hero.width, hero.height);
+
+            if (chaseRec.IntersectsWith(heroRec))
+            {
+                chaseBall.ySpeed *= -1;
+            }
+
             Refresh();
         }
 
