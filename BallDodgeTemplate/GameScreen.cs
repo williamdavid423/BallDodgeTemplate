@@ -149,7 +149,7 @@ namespace BallDodgeTemplate
                     if (lives == 0)
                     {
                         gameTImer.Enabled = false;
-                        Form1.ChangeScreen(this, new MenuScreen());
+                        Form1.ChangeScreen(this, new gameoverScreen());
                     }
                 }
             }
