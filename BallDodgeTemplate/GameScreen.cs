@@ -15,6 +15,9 @@ namespace BallDodgeTemplate
         Ball chaseBall;
         Player hero;
 
+        public static int lives, difficuly;
+        int score = 0;
+
         List<Ball> dodgeBalls = new List<Ball>();
         
         Random randGen = new Random();
@@ -38,25 +41,30 @@ namespace BallDodgeTemplate
         {
             screenSize = new Size(this.Width, this.Height);
 
-            int x = randGen.Next(40, gsWidth - 40);
-            int y = randGen.Next(40, gsHeight - 40);
+
+            int x = randGen.Next(40, screenSize.Width - 40);
+            int y = randGen.Next(40, screenSize.Height - 40);
 
             chaseBall = new Ball(x, y, 8, 8);
 
-            x = randGen.Next(40, gsWidth - 40);
-            y = randGen.Next(40, gsHeight - 40);
+            x = randGen.Next(40, screenSize.Width - 40);
+            y = randGen.Next(40, screenSize.Height - 40);
             hero = new Player(x, y);
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < difficuly; i++)
             {
-                x = randGen.Next(40, gsWidth - 40);
-                y = randGen.Next(40, gsHeight - 40);
-
-                Ball b = new Ball(x, y, 8, 8);
-                dodgeBalls.Add(b);
+                NewBall();
             }
         }
 
+        public void NewBall()
+        {
+            int x = randGen.Next(40, gsWidth - 40);
+            int y = randGen.Next(40, gsHeight - 40);
+
+            Ball b = new Ball(x, y, 8, 8);
+            dodgeBalls.Add(b);
+        }
 
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -126,20 +134,35 @@ namespace BallDodgeTemplate
                 b.Move(screenSize);
             }
             
-            Rectangle chaseRec = new Rectangle(chaseBall.x, chaseBall.y, chaseBall.size, chaseBall.size);
-
-            Rectangle heroRec = new Rectangle(hero.x, hero.y, hero.width, hero.height);
-
-            if (chaseRec.IntersectsWith(heroRec))
+            if(chaseBall.Collision(hero))
             {
-                chaseBall.ySpeed *= -1;
+                score++;
+                NewBall();
             }
+
+            foreach (Ball b in dodgeBalls)
+            {
+                if (b.Collision(hero))
+                {
+                    lives--;
+
+                    if (lives == 0)
+                    {
+                        gameTImer.Enabled = false;
+                        Form1.ChangeScreen(this, new MenuScreen());
+                    }
+                }
+            }
+
 
             Refresh();
         }
 
         private void GameScreen_Paint(object sender, PaintEventArgs e)
         {
+            scoreLabel.Text = $"{score}";
+            livesLabel.Text = $"{lives}";
+
             e.Graphics.FillEllipse(Brushes.Green, chaseBall.x, chaseBall.y, chaseBall.size, chaseBall.size);
 
             foreach (Ball b in dodgeBalls)
