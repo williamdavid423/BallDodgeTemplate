@@ -12,7 +12,8 @@ namespace BallDodgeTemplate
     {
         // colour, rectangle 
         public int size = 10;
-        public int xSpeed, ySpeed;
+        public int xSpeed;
+            public int ySpeed;
         public int x, y;
 
         public Ball(int _x, int _y, int _xSpeed, int _ySpeed)

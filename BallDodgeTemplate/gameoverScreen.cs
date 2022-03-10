@@ -15,6 +15,7 @@ namespace BallDodgeTemplate
         public gameoverScreen()
         {
             InitializeComponent();
+            label1.Text = $"Game Over\nYou Scored {GameScreen.score}";
         }
 
         private void menuButton_Click(object sender, EventArgs e)

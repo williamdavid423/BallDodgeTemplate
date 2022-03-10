@@ -16,7 +16,7 @@ namespace BallDodgeTemplate
         Player hero;
 
         public static int lives, difficuly;
-        int score = 0;
+        public static int score = 0;
 
         List<Ball> dodgeBalls = new List<Ball>();
         
@@ -31,6 +31,9 @@ namespace BallDodgeTemplate
         public static bool leftArrowDown = false;
         bool rightArrowDown = false;
 
+        public static Random randGen2 = new Random(6 - 100);
+        public static Random randGen3 = new Random(6 - 100);
+
         public GameScreen()
         {
             InitializeComponent();
@@ -44,6 +47,7 @@ namespace BallDodgeTemplate
 
             int x = randGen.Next(40, screenSize.Width - 40);
             int y = randGen.Next(40, screenSize.Height - 40);
+       
 
             chaseBall = new Ball(x, y, 8, 8);
 

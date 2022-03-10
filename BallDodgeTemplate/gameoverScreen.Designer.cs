@@ -30,6 +30,7 @@
         {
             this.exitButton = new System.Windows.Forms.Button();
             this.menuButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // exitButton
@@ -58,11 +59,22 @@
             this.menuButton.UseVisualStyleBackColor = true;
             this.menuButton.Click += new System.EventHandler(this.menuButton_Click);
             // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(177, 43);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(251, 94);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "label1";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // gameoverScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.menuButton);
             this.Controls.Add(this.exitButton);
             this.Name = "gameoverScreen";
@@ -75,5 +87,6 @@
 
         private System.Windows.Forms.Button exitButton;
         private System.Windows.Forms.Button menuButton;
+        private System.Windows.Forms.Label label1;
     }
 }
